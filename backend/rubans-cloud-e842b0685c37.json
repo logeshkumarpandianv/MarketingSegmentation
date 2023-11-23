@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "rubans-cloud",
+  "private_key_id": "e842b0685c37b4fa28172d2fb50bbeba3a667239",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCsDOjeNc8m15QX\n43zDR+PltP9uihKszzk2wMQz8gsEdNLQpIxwxdnRiFY43yp+/ToAw8pdeR8J+SDv\nGvRWnChfE2swFa05QIlSqUY3/InpVLcNLmWKWM/ZAtbeoU3aAu/7o7szoXhvep3D\n4cbfFp1u8dJ0uIBUo1jeerFOiaIi4djNF1wFSI4oir5K7HzdKIWtkJK5ZeTeiJKj\n758kXYkYV61YJ68edpRPeEStPckpN3ZGLtDr9FYwOmJtRW5GbwLeY4kLEqlqMZX+\nQUbiUn8siwUAZ9y469wBsTG9LUPJCy4Gv/bzbCmTVFOIWdA/h0z0tE+48iRZi/GQ\nCpG3TIsZAgMBAAECggEABhYKa/qutY3wfnkJuH8dbmQQMxdURzB1zCkjTgxOXBDl\neJ1eUHDw3krt2q/ErF65A6TpaC2sLbY8qYI94w09sMGz/xMm02/w5TxffQSEb/1G\nRzbKDCWAuLyZrQduUXt2hMn+cC2fYB/DK+/OxD59dDRYTWoamnCqzwS7d+7bdIaT\nJUreSez01N07FRitWs+IOyGEyWhxf3DgJK56HbMqnZXgnNumcQhVBEfef4CEh0pV\nKX3vbOlX6P4sfkfXWUDIZ7ocDKKHXSFM6BpQFZzVYcLqFdYiN392YQ52G5UJks/Y\nRl2inSiFeqNLA/6yIozCghlf4FcuRLKP9371Wya6OQKBgQDuFAAforvEXmhbm3dj\npJhhboiU156In0ui2oAhVBiBJ6k4NHVQ7Xk97fJQzV8nM816XoQuwOC15PFvSXXn\nJN3UN7nfqrvdB4dInxQU/NAtMsh78drw/U6ef0RtQY1jbUJSv3AJU+ZCja8uSPlF\nEstwSqdGRTjBJxHkCHC+a6aqTQKBgQC5AH2RyfVr3sbs/Zlg90UO+3eegRkCLKrY\nW/feFdQpxNUKYDx6OvmZfw17AXLJmcD+YwX/cJIuxbzjJOwR1mhq65mTQM3LFkEs\nQTdEY9hdU/TAeVGr6hKXnWLpEry2pTGQTzIMm/xL+k61mPEytSeFSfXZqHqyo82m\nKi2MFLOx/QKBgCYBb1udgNgCMiqdkNuJRQIYwRjxqs8ojsx6kQXBBQBpMmxUg33d\nywMF3y7i+hOqA11LhVJpW/XtjFU1puq1Sew80SFRghfwwbnoGy6WhS0R9EtE+qyJ\n42kN7AB8/HMo1/OZt+rlR9bMA3EiGRjbvTo50KY5GqxK7mI2rrjXOo3pAoGAU/Uj\nB3yuAkxR3s+gQd812fzJZoeT/+ahihsCvCkP5fzL6i+OgrItADomtgIMQ+2hJlFu\nMWS3Er7uX+8rq1SwgoV1ZtxsCJSK8ziNil39nS0yz/6+z9Qkp+XnM3srZYBGpAUs\n44gO0bRA8Cz+mVKZIuZTynmpZVTtSVGu5fmnK0kCgYBPQgbMg70750hXpmbkpntf\nj50UFytS/+PN0/lONAcOBwRWvFqFPvJyxwqxwcVsGlIMDaiDSeH/TUIyHcXoJqOU\nfWBi2/0cc7dGXhXPKZMsGX1FYB1FmcK8gQG12QKBzENm4wGnIg1dCXh+W2Pl/cXb\npgABCWGkF+51+RGZMcG8VQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "rubans-cloud@appspot.gserviceaccount.com",
+  "client_id": "108649863412182432950",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/rubans-cloud%40appspot.gserviceaccount.com"
+}

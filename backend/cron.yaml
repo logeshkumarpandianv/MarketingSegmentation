@@ -1,0 +1,8 @@
+# cron.yaml
+cron:
+- description: "daily summary job"
+  url: /api/v1/tasks/mail
+  schedule: every day 18:38
+  timezone: Asia/Kolkata
+
+# end cron.yaml
