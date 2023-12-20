@@ -164,6 +164,7 @@ const Query = ({ fieldCheck, bgColor, position, bottom, field, operation, handle
         )}
 
         <SelectOption>
+
           {operation.length > 0 && operation[0].value === "In" && (
             <>
               <Select
