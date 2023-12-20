@@ -97,7 +97,7 @@ const Query = ({ fieldCheck, bgColor, position, bottom, field, operation, handle
           let month = singleDate1.getMonth()+1;
           let year = singleDate1.getFullYear();
 
-          query1 = field[0].value + " " + operation[0].symbol + " '" + day+"/"+month+"/"+year + "'";
+          query1 = field[0].value + " " + operation[0].symbol + " '" + year+"-"+month+"-"+day+ "'";
 
         } else if (operation[0].value === "Between") {
 
@@ -116,7 +116,7 @@ const Query = ({ fieldCheck, bgColor, position, bottom, field, operation, handle
             month2 = singleDate2.getMonth()+1;
             year2 = singleDate2.getFullYear();
 
-            query1 = field[0].value + " >" + " '" + day1+"/"+month1+"/"+year1 + "' and " + field[0].value + " < '" + day2+"/"+month2+"/"+year2 + "'";
+            query1 = field[0].value + " >" + " '" + year1+"-"+month1+"-"+day1 + "' and " + field[0].value + " < '" + year2+"-"+month2+"-"+day2 + "'";
           }
         }
       }
