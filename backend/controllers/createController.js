@@ -35,16 +35,17 @@ const Fetch = async (req, res) => {
     const result = await db.query("select * from query_status");
 
     const data = result.rows;
+    // console.log(result.rows);
 
-    if (data.length > 0) {
-      res.status(200).json({
-        error: "no error",
-        data: data,
-        message: "Fetched Successfully",
-      });
-    } else {
-      res.status(200).json({ error: "error", message: "Something went wrong" });
-    }
+    // if (data.length > 0) {
+    res.status(200).json({
+      error: "no error",
+      data: data,
+      message: "Fetched Successfully",
+    });
+    // } else {
+    //   res.status(200).json({ error: "error", message: "Something went wrong" });
+    // }
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
