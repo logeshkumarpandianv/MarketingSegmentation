@@ -1,9 +1,10 @@
 // import { useContext, useState } from "react"
-// import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import Input from "../Components/Subcomponents/Input";
 import Button from "../Components/Subcomponents/Button";
+import { useEffect, useState } from "react";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -57,8 +58,55 @@ const SmallText = styled(motion.div)`
   font-weight: bold;
 `;
 
+const Message = styled(motion.div)`
+  font-size: 12px;
+  color: red;
+`;
+
 const Login = () => {
-  // const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleUserName = (e) => {
+    setUserName(e.target.value);
+  };
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleLogin = () => {
+    setLoading(true);
+    if (userName === "gocolors" && password === "12345678") {
+      localStorage.setItem("user", JSON.stringify("gocolors"));
+      setMessage("");
+      navigate("/home");
+      setLoading(false);
+    } else {
+      setMessage("Username or password wrong");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const reloadCount = sessionStorage.getItem("reloadCount");
+    if (reloadCount < 1) {
+      sessionStorage.setItem("reloadCount", String(reloadCount + 1));
+      localStorage.removeItem("user");
+      window.location.reload();
+    } else {
+      sessionStorage.removeItem("reloadCount");
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   console.log(userName, password);
+  // });
 
   return (
     <Container
@@ -89,10 +137,20 @@ const Login = () => {
       </Left>
       <Right>
         <RightInner>
-          <Input label={"Username"} />
-          <Input label={"Password"} />
+          <Message>{message}</Message>
+          <Input label={"Username"} onChange={handleUserName} />
+          <Input
+            label={"Password"}
+            onChange={handlePassword}
+            type={"password"}
+          />
           <ButtonContainer>
-            <Button bgcolor={"black"} color={"white"} name={"submit"} />
+            <Button
+              bgcolor={"black"}
+              color={"white"}
+              name={loading ? "loading..." : "submit"}
+              onClick={handleLogin}
+            />
           </ButtonContainer>
         </RightInner>
       </Right>

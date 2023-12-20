@@ -7,9 +7,27 @@ export const DataContext = createContext();
 const AuthContextProvider = (props) => {
   const url = "http://localhost:8080/api/v1/";
 
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    async function fetchData() {
+      if (localStorage.getItem("user") !== null) {
+        setUser(localStorage.getItem("user"));
+      } else {
+        setUser("");
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    console.log(user);
+  });
+
   const fields = [
     { id: "ZoneName", value: "ZoneName", type: 2, setting: "Dropdown" },
-    { id: "RegionName", value: "RegionName", type: 2, setting: "Dropdown" },
+    { id: "StateName", value: "StateName", type: 2, setting: "Dropdown" },
     { id: "StoreName", value: "StoreName", type: 2, setting: "Dropdown" },
     // prettier-ignore
     { id: "AlternateStoreCode", value: "AlternateStoreCode", type: 2, setting: "Dropdown" },
@@ -23,11 +41,16 @@ const AuthContextProvider = (props) => {
     // prettier-ignore
     // { id: "Mode of Payment", value: "ModeofPayment", type: 2, setting: "Dropdown" },
     // prettier-ignore
-    // { id: "Customer Type", value: "CustomerType", type: 1, setting: "Dropdown" },
-    { id: "CustomerCreatedOn", value: "CustomerCreatedOn", type: 3, setting: "Calender" },
+    { id: "Customer Type", value: "CustomerType", type: 1, setting: "Dropdown" },
+    {
+      id: "CustomerCreatedOn",
+      value: "CustomerCreatedOn",
+      type: 3,
+      setting: "Calender",
+    },
     // prettier-ignore
     { id: "SalesType", value: "SalesType", type: 1, setting: "Dropdown" },
-    // { id: "City Name", value: "CityName", type: 2, setting: "Dropdown" },
+    { id: "City Name", value: "CityName", type: 2, setting: "Dropdown" },
     // prettier-ignore
 
     { id: "CustomerBAPinCode", value: "CustomerBAPinCode", type: 3, setting: "Input" },
@@ -60,15 +83,15 @@ const AuthContextProvider = (props) => {
     { type: 3, id: "Between", value: "Between", symbol: "" },
   ];
 
-  const options = [
-    { type: "ZoneName", id: "South", value: "South" },
-    { type: "ZoneName", id: "West", value: "West" },
-    { type: "ZoneName", id: "North", value: "North" },
-    { type: "ZoneName", id: "East", value: "East" },
+  // const options = [
+  //   { type: "ZoneName", id: "South", value: "South" },
+  //   { type: "ZoneName", id: "West", value: "West" },
+  //   { type: "ZoneName", id: "North", value: "North" },
+  //   { type: "ZoneName", id: "East", value: "East" },
 
-    { type: "State", id: "Tamil Nadu", value: "TamilNadu" },
-    { type: "State", id: "Kerala", value: "Kerala" },
-  ];
+  //   { type: "State", id: "Tamil Nadu", value: "TamilNadu" },
+  //   { type: "State", id: "Kerala", value: "Kerala" },
+  // ];
 
   const [data, setData] = useState([]);
   const [msg, setMsg] = useState("loading");
@@ -88,9 +111,37 @@ const AuthContextProvider = (props) => {
     fetchData();
   }, []);
 
+  const [options, setOptions] = useState([]);
+  const [msg1, setMsg1] = useState("loading");
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await FetchData({
+        endpoint: url + "create/label",
+      });
+
+      if (response.error === "no error") {
+        setOptions(response.data);
+        setMsg1("done");
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <DataContext.Provider
-      value={{ fields, operations, options, url, data, msg }}
+      value={{
+        fields,
+        operations,
+        options,
+        url,
+        data,
+        msg1,
+        user,
+        msg,
+        setUser,
+      }}
     >
       {props.children}
     </DataContext.Provider>

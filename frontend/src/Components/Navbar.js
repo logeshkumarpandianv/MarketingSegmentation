@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { useContext } from "react";
+import { DataContext } from "../Contexts/DataContext";
+import { useNavigate } from "react-router-dom";
 
 const Nav = styled(motion.div)`
   height: 55px;
@@ -34,16 +37,47 @@ const Logo = styled.div`
   box-shadow: var(--box-shadow);
   color: black;
 `;
+
+const Login = styled.div`
+  background-color: var(--nav-color);
+  color: var(--main-color);
+  width: max-content;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  letter-spacing: 1.2px;
+`;
+
 const Menu = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--font-s);
   gap: 5%;
-  padding-right: 100px;
+  padding-right: 50px;
 `;
 
 const Navbar = () => {
+  const { user } = useContext(DataContext);
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    localStorage.removeItem("user");
+    navigate("/");
+    window.location.reload();
+  };
+
+  // useEffect(() => {
+  //   const reloadCount = sessionStorage.getItem("reloadCount");
+  //   if (reloadCount < 1) {
+  //     sessionStorage.setItem("reloadCount", String(reloadCount + 1));
+  //     localStorage.removeItem("user");
+  //     window.location.reload();
+  //   } else {
+  //     sessionStorage.removeItem("reloadCount");
+  //   }
+  // }, []);
+
   return (
     <Nav
       initial={{ opacity: 0 }}
@@ -64,7 +98,13 @@ const Navbar = () => {
           duration: 0.5,
           delay: 0.3,
         }}
-      ></Menu>
+      >
+        {user.length > 0 && (
+          <Login onClick={() => handleLogin()}>
+            <>{user ? "LOGOUT" : "LOGIN"} </>
+          </Login>
+        )}
+      </Menu>
     </Nav>
   );
 };

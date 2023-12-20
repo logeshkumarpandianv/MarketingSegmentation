@@ -235,11 +235,21 @@ const RightFooter = styled.div`
 `;
 
 const Homepage = () => {
-  const { url, data, msg } = useContext(DataContext);
+  const { url, data, msg, options } = useContext(DataContext);
 
   useEffect(() => {
-    console.log(data);
-  });
+    const reloadCount = sessionStorage.getItem("reloadCount");
+    if (reloadCount < 1) {
+      sessionStorage.setItem("reloadCount", String(reloadCount + 1));
+      window.location.reload();
+    } else {
+      sessionStorage.removeItem("reloadCount");
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   console.log(data);
+  // });
 
   const [constraints, setConstraints] = useState("1");
 
@@ -496,7 +506,7 @@ const Homepage = () => {
 
     let finalList = [a, b, c, d, e];
     setUsedFields(finalList);
-    console.log(finalList);
+    // console.log(finalList);
   }, [field1, field2, field3, field4, field5]);
 
   ///////////////////////////// Final Query ///////////////////////////////
@@ -611,291 +621,301 @@ const Homepage = () => {
             delay: 0.5,
           }}
         >
-          <Left>
-            <Header onClick={() => setCreate(!create)}>
-              <BsBookmarkPlusFill size={20} />
-              <span> Create New </span>
-            </Header>
+          {options.length > 0 ? (
+            <>
+              <Left>
+                <Header onClick={() => setCreate(!create)}>
+                  <BsBookmarkPlusFill size={20} />
+                  <span> Create New </span>
+                </Header>
 
-            <Recents>
-              <RecentHeader>More Recents</RecentHeader>
-              <RecentContainer>
-                {data.map((value, i) => {
-                  return (
-                    <Queries key={i} val={i % 2 === 0 ? "#e9ecef" : ""}>
-                      {value.query_name.length > 20 ? (
-                        <QName>{value.query_name}</QName>
-                      ) : (
-                        <QName>{value.query_name}</QName>
-                      )}
-                      <QID> {value.id}</QID>
-                      <QStatus>{value.status}</QStatus>
-                    </Queries>
-                  );
-                })}
-              </RecentContainer>
-            </Recents>
-          </Left>
+                <Recents>
+                  <RecentHeader>More Recents</RecentHeader>
+                  <RecentContainer>
+                    {data.length > 0 &&
+                      data.map((value, i) => {
+                        return (
+                          <Queries key={i} val={i % 2 === 0 ? "#e9ecef" : ""}>
+                            {/* {value.query_name.length > 20 ? (
+                          <QName>{value.query_name}</QName>
+                        ) : (
+                          <QName>{value.query_name}</QName>
+                        )} */}
+                            <QName>{value.query_name}</QName>
+                            <QID> {value.id}</QID>
+                            <QStatus>{value.status}</QStatus>
+                          </Queries>
+                        );
+                      })}
+                  </RecentContainer>
+                </Recents>
+              </Left>
 
-          {create ? (
-            <Center
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 100,
-                duration: 0.2,
-                delay: 0.2,
-              }}
-            >
-              <Top>
-                <Header>Query Builder</Header>
-                <Name>
-                  <Input
-                    size={SIZE.compact}
-                    value={name}
-                    onChange={(event) => setName(event.currentTarget.value)}
-                    placeholder="Enter Name"
-                  />
-                </Name>
-              </Top>
-              <QueryBuilder>
-                {constraints >= 1 && (
-                  <Query
-                    field={field1}
-                    handleField={handleField1}
-                    operation={operation1}
-                    handleOperation={handleOperation1}
-                    option={option1}
-                    setOption={setOption1}
-                    singleDate1={singleDate11}
-                    setSingleDate1={setSingleDate11}
-                    singleDate2={singleDate21}
-                    setSingleDate2={setSingleDate21}
-                    input1={input11}
-                    setInput1={setInput11}
-                    input2={input21}
-                    setInput2={setInput21}
-                    handleConstraints={handleConstraints}
-                    setQuery={setQuery1}
-                    usedFields={usedFields}
-                  />
-                )}
+              {create ? (
+                <Center
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 100,
+                    duration: 0.2,
+                    delay: 0.2,
+                  }}
+                >
+                  <Top>
+                    <Header>Query Builder</Header>
+                    <Name>
+                      <Input
+                        size={SIZE.compact}
+                        value={name}
+                        onChange={(event) => setName(event.currentTarget.value)}
+                        placeholder="Enter Name"
+                      />
+                    </Name>
+                  </Top>
+                  <QueryBuilder>
+                    {constraints >= 1 && (
+                      <Query
+                        field={field1}
+                        handleField={handleField1}
+                        operation={operation1}
+                        handleOperation={handleOperation1}
+                        option={option1}
+                        setOption={setOption1}
+                        singleDate1={singleDate11}
+                        setSingleDate1={setSingleDate11}
+                        singleDate2={singleDate21}
+                        setSingleDate2={setSingleDate21}
+                        input1={input11}
+                        setInput1={setInput11}
+                        input2={input21}
+                        setInput2={setInput21}
+                        handleConstraints={handleConstraints}
+                        setQuery={setQuery1}
+                        usedFields={usedFields}
+                      />
+                    )}
 
-                {constraints >= 2 &&
-                  (option1.length > 0 ||
-                    singleDate11 !== null ||
-                    singleDate21 !== null ||
-                    input11 !== undefined ||
-                    input21 !== undefined) && (
-                    <Query
-                      field={field2}
-                      handleField={handleField2}
-                      operation={operation2}
-                      handleOperation={handleOperation2}
-                      option={option2}
-                      setOption={setOption2}
-                      singleDate1={singleDate12}
-                      setSingleDate1={setSingleDate12}
-                      singleDate2={singleDate22}
-                      setSingleDate2={setSingleDate22}
-                      input1={input12}
-                      setInput1={setInput12}
-                      input2={input22}
-                      setInput2={setInput22}
-                      handleConstraints={handleConstraints}
-                      setQuery={setQuery2}
-                      usedFields={usedFields}
-                    />
-                  )}
-
-                {constraints >= 3 &&
-                  (option2.length > 0 ||
-                    singleDate12 !== null ||
-                    singleDate22 !== null ||
-                    input12 !== undefined ||
-                    input22 !== undefined) && (
-                    <Query
-                      field={field3}
-                      handleField={handleField3}
-                      operation={operation3}
-                      handleOperation={handleOperation3}
-                      option={option3}
-                      setOption={setOption3}
-                      singleDate1={singleDate13}
-                      setSingleDate1={setSingleDate13}
-                      singleDate2={singleDate23}
-                      setSingleDate2={setSingleDate23}
-                      input1={input13}
-                      setInput1={setInput13}
-                      input2={input23}
-                      setInput2={setInput23}
-                      handleConstraints={handleConstraints}
-                      setQuery={setQuery3}
-                      usedFields={usedFields}
-                    />
-                  )}
-
-                {constraints >= 4 &&
-                  (option3.length > 0 ||
-                    singleDate13 !== null ||
-                    singleDate23 !== null ||
-                    input13 !== undefined ||
-                    input23 !== undefined) && (
-                    <Query
-                      field={field4}
-                      handleField={handleField4}
-                      operation={operation4}
-                      handleOperation={handleOperation4}
-                      option={option4}
-                      setOption={setOption4}
-                      singleDate1={singleDate14}
-                      setSingleDate1={setSingleDate14}
-                      singleDate2={singleDate24}
-                      setSingleDate2={setSingleDate24}
-                      input1={input14}
-                      setInput1={setInput14}
-                      input2={input24}
-                      setInput2={setInput24}
-                      handleConstraints={handleConstraints}
-                      setQuery={setQuery4}
-                      usedFields={usedFields}
-                    />
-                  )}
-
-                {constraints >= 5 &&
-                  (option4.length > 0 ||
-                    singleDate14 !== null ||
-                    singleDate24 !== null ||
-                    input14 !== undefined ||
-                    input24 !== undefined) && (
-                    <Query
-                      field={field5}
-                      handleField={handleField5}
-                      operation={operation5}
-                      handleOperation={handleOperation5}
-                      option={option5}
-                      setOption={setOption5}
-                      singleDate1={singleDate15}
-                      setSingleDate1={setSingleDate15}
-                      singleDate2={singleDate25}
-                      setSingleDate2={setSingleDate25}
-                      input1={input15}
-                      setInput1={setInput15}
-                      input2={input25}
-                      setInput2={setInput25}
-                      handleConstraints={handleConstraints}
-                      setQuery={setQuery5}
-                      usedFields={usedFields}
-                    />
-                  )}
-
-                {(radio === "2" || radio === "3") && (
-                  <Query
-                    bgColor={"#ffcdb2"}
-                    position={"absolute"}
-                    bottom={"0px"}
-                    field={field6}
-                    handleField={handleField6}
-                    operation={operation6}
-                    handleOperation={handleOperation6}
-                    option={option6}
-                    setOption={setOption6}
-                    singleDate1={singleDate16}
-                    setSingleDate1={setSingleDate16}
-                    singleDate2={singleDate26}
-                    setSingleDate2={setSingleDate26}
-                    input1={input16}
-                    setInput1={setInput16}
-                    input2={input26}
-                    setInput2={setInput26}
-                    handleConstraints={handleConstraints}
-                    setQuery={setQuery6}
-                    usedFields={usedFields}
-                    fieldCheck={true}
-                  />
-                )}
-              </QueryBuilder>
-
-              {name.length > 0 &&
-                (query1 !== "" ||
-                  query2 !== "" ||
-                  query3 !== "" ||
-                  query4 !== "" ||
-                  query5 !== "") && (
-                  <BottomContainer>
-                    <SliderContainer>
-                      <RadioGroup
-                        align="horizontal"
-                        name="horizontal"
-                        onChange={(e) => setRadio(e.target.value)}
-                        value={radio}
-                      >
-                        <Radio value="1">None</Radio>
-                        <Radio value="2">Include Range</Radio>
-                        <Radio value="3">Exclude Range</Radio>
-                      </RadioGroup>
-                    </SliderContainer>
-                    {load ? (
-                      <SubmitContainer>
-                        <Button
-                          bgcolor={"lightgrey"}
-                          color={"black"}
-                          name={"Loading..."}
+                    {constraints >= 2 &&
+                      (option1.length > 0 ||
+                        singleDate11 !== null ||
+                        singleDate21 !== null ||
+                        input11 !== undefined ||
+                        input21 !== undefined) && (
+                        <Query
+                          field={field2}
+                          handleField={handleField2}
+                          operation={operation2}
+                          handleOperation={handleOperation2}
+                          option={option2}
+                          setOption={setOption2}
+                          singleDate1={singleDate12}
+                          setSingleDate1={setSingleDate12}
+                          singleDate2={singleDate22}
+                          setSingleDate2={setSingleDate22}
+                          input1={input12}
+                          setInput1={setInput12}
+                          input2={input22}
+                          setInput2={setInput22}
+                          handleConstraints={handleConstraints}
+                          setQuery={setQuery2}
+                          usedFields={usedFields}
                         />
-                      </SubmitContainer>
-                    ) : (
-                      <>
-                        {finalQuery.length > 0 ? (
+                      )}
+
+                    {constraints >= 3 &&
+                      (option2.length > 0 ||
+                        singleDate12 !== null ||
+                        singleDate22 !== null ||
+                        input12 !== undefined ||
+                        input22 !== undefined) && (
+                        <Query
+                          field={field3}
+                          handleField={handleField3}
+                          operation={operation3}
+                          handleOperation={handleOperation3}
+                          option={option3}
+                          setOption={setOption3}
+                          singleDate1={singleDate13}
+                          setSingleDate1={setSingleDate13}
+                          singleDate2={singleDate23}
+                          setSingleDate2={setSingleDate23}
+                          input1={input13}
+                          setInput1={setInput13}
+                          input2={input23}
+                          setInput2={setInput23}
+                          handleConstraints={handleConstraints}
+                          setQuery={setQuery3}
+                          usedFields={usedFields}
+                        />
+                      )}
+
+                    {constraints >= 4 &&
+                      (option3.length > 0 ||
+                        singleDate13 !== null ||
+                        singleDate23 !== null ||
+                        input13 !== undefined ||
+                        input23 !== undefined) && (
+                        <Query
+                          field={field4}
+                          handleField={handleField4}
+                          operation={operation4}
+                          handleOperation={handleOperation4}
+                          option={option4}
+                          setOption={setOption4}
+                          singleDate1={singleDate14}
+                          setSingleDate1={setSingleDate14}
+                          singleDate2={singleDate24}
+                          setSingleDate2={setSingleDate24}
+                          input1={input14}
+                          setInput1={setInput14}
+                          input2={input24}
+                          setInput2={setInput24}
+                          handleConstraints={handleConstraints}
+                          setQuery={setQuery4}
+                          usedFields={usedFields}
+                        />
+                      )}
+
+                    {constraints >= 5 &&
+                      (option4.length > 0 ||
+                        singleDate14 !== null ||
+                        singleDate24 !== null ||
+                        input14 !== undefined ||
+                        input24 !== undefined) && (
+                        <Query
+                          field={field5}
+                          handleField={handleField5}
+                          operation={operation5}
+                          handleOperation={handleOperation5}
+                          option={option5}
+                          setOption={setOption5}
+                          singleDate1={singleDate15}
+                          setSingleDate1={setSingleDate15}
+                          singleDate2={singleDate25}
+                          setSingleDate2={setSingleDate25}
+                          input1={input15}
+                          setInput1={setInput15}
+                          input2={input25}
+                          setInput2={setInput25}
+                          handleConstraints={handleConstraints}
+                          setQuery={setQuery5}
+                          usedFields={usedFields}
+                        />
+                      )}
+
+                    {(radio === "2" || radio === "3") && (
+                      <Query
+                        bgColor={"#ffcdb2"}
+                        position={"absolute"}
+                        bottom={"0px"}
+                        field={field6}
+                        handleField={handleField6}
+                        operation={operation6}
+                        handleOperation={handleOperation6}
+                        option={option6}
+                        setOption={setOption6}
+                        singleDate1={singleDate16}
+                        setSingleDate1={setSingleDate16}
+                        singleDate2={singleDate26}
+                        setSingleDate2={setSingleDate26}
+                        input1={input16}
+                        setInput1={setInput16}
+                        input2={input26}
+                        setInput2={setInput26}
+                        handleConstraints={handleConstraints}
+                        setQuery={setQuery6}
+                        usedFields={usedFields}
+                        fieldCheck={true}
+                      />
+                    )}
+                  </QueryBuilder>
+
+                  {name.length > 0 &&
+                    (query1 !== "" ||
+                      query2 !== "" ||
+                      query3 !== "" ||
+                      query4 !== "" ||
+                      query5 !== "") && (
+                      <BottomContainer>
+                        <SliderContainer>
+                          <RadioGroup
+                            align="horizontal"
+                            name="horizontal"
+                            onChange={(e) => setRadio(e.target.value)}
+                            value={radio}
+                          >
+                            <Radio value="1">None</Radio>
+                            <Radio value="2">Include Range</Radio>
+                            <Radio value="3">Exclude Range</Radio>
+                          </RadioGroup>
+                        </SliderContainer>
+                        {load ? (
                           <SubmitContainer>
                             <Button
-                              bgcolor={"black"}
-                              color={"white"}
-                              name={"submit"}
-                              onClick={handleSubmit}
+                              bgcolor={"lightgrey"}
+                              color={"black"}
+                              name={"Loading..."}
                             />
                           </SubmitContainer>
                         ) : (
-                          <SubmitContainer>
-                            <Button
-                              bgcolor={"black"}
-                              color={"white"}
-                              name={"close"}
-                              onClick={handleClose}
-                            />
-                          </SubmitContainer>
+                          <>
+                            {finalQuery.length > 0 ? (
+                              <SubmitContainer>
+                                <Button
+                                  bgcolor={"black"}
+                                  color={"white"}
+                                  name={"submit"}
+                                  onClick={handleSubmit}
+                                />
+                              </SubmitContainer>
+                            ) : (
+                              <SubmitContainer>
+                                <Button
+                                  bgcolor={"black"}
+                                  color={"white"}
+                                  name={"close"}
+                                  onClick={handleClose}
+                                />
+                              </SubmitContainer>
+                            )}
+                          </>
                         )}
-                      </>
+                      </BottomContainer>
                     )}
-                  </BottomContainer>
-                )}
-            </Center>
-          ) : (
-            <Center1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 100,
-                duration: 0.2,
-                delay: 0.2,
-              }}
-            >
-              Build your queries here
-            </Center1>
-          )}
+                </Center>
+              ) : (
+                <Center1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 100,
+                    duration: 0.2,
+                    delay: 0.2,
+                  }}
+                >
+                  Build your queries here
+                </Center1>
+              )}
 
-          <Right bgcolor={message.length > 0 ? "#ffd6ff" : "#d7e3fc"}>
-            <RightHeader>
-              <RightHeaderInner>Final Query</RightHeaderInner>
-            </RightHeader>
-            {message.length > 0 ? (
-              <RightBody>{message}</RightBody>
-            ) : (
-              <RightBody>{finalQuery}</RightBody>
-            )}
-            <RightFooter></RightFooter>
-          </Right>
+              <Right bgcolor={message.length > 0 ? "#ffd6ff" : "#d7e3fc"}>
+                <RightHeader>
+                  <RightHeaderInner>Final Query</RightHeaderInner>
+                </RightHeader>
+                {message.length > 0 ? (
+                  <RightBody>{message}</RightBody>
+                ) : (
+                  <RightBody>{finalQuery}</RightBody>
+                )}
+                <RightFooter></RightFooter>
+              </Right>
+            </>
+          ) : (
+            <Container>
+              <Inner>Loading...</Inner>
+            </Container>
+          )}
         </Container>
       )}
     </>
