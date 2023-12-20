@@ -34,7 +34,28 @@ const Fetch = async (req, res) => {
   try {
     const result = await db.query("select * from query_status");
 
-    console.log(result.rows);
+    const data = result.rows;
+
+    if (data.length > 0) {
+      res.status(200).json({
+        error: "no error",
+        data: data,
+        message: "Fetched Successfully",
+      });
+    } else {
+      res.status(200).json({ error: "error", message: "Something went wrong" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+const Label = async (req, res) => {
+  try {
+    const result = await db.query("select * from master_ui");
+
+    // console.log(result.rows);
     const data = result.rows;
 
     if (data.length > 0) {
@@ -55,4 +76,5 @@ const Fetch = async (req, res) => {
 module.exports = {
   Check,
   Fetch,
+  Label,
 };
