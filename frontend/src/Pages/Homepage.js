@@ -521,48 +521,48 @@ const Homepage = () => {
       if (field5.length > 0) {
 
         if (field6.length > 0 ) {
-          setFinalQuery("SELECT DISTINCT customer_code from master_sales_data where " + query1 + " and " + query2 + " and " + query3 + " and " + query4 + " and " + query5
-                        +" AND customer_code " + radioBtn + " (SELECT DISTINCT customer_code from master_sales_data where " + query6 + ")");
+          setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1 + " and " + query2 + " and " + query3 + " and " + query4 + " and " + query5
+                        +" AND customer_code " + radioBtn + " (SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query6 + ")");
         } else {
           // prettier-ignore
-          setFinalQuery("SELECT DISTINCT customer_code from master_sales_data where " + query1 + " and " + query2 + " and " + query3 + " and " + query4 + " and " + query5);
+          setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1 + " and " + query2 + " and " + query3 + " and " + query4 + " and " + query5);
         }
     } else if (field4.length > 0) {
 
       if (field6.length > 0) {
-          setFinalQuery("SELECT DISTINCT customer_code from master_sales_data where " + query1 + " and " + query2 + " and " + query3 + " and " + query4
-          +" AND customer_code " + radioBtn + " (SELECT DISTINCT customer_code from master_sales_data where " + query6 + ")");
+          setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1 + " and " + query2 + " and " + query3 + " and " + query4
+          +" AND customer_code " + radioBtn + " (SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query6 + ")");
      
       } else {
         // prettier-ignore
-        setFinalQuery("SELECT DISTINCT customer_code from master_sales_data where " + query1 + " and " + query2 + " and " + query3 + " and " + query4);
+        setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1 + " and " + query2 + " and " + query3 + " and " + query4);
       }
     } else if (field3.length > 0) {
 
       if (field6.length > 0) {
-          setFinalQuery("SELECT DISTINCT customer_code from master_sales_data where " + query1 + " and " + query2 + " and " + query3
-          +" AND customer_code " + radioBtn + " (SELECT DISTINCT customer_code from master_sales_data where " + query6 + ")");
+          setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1 + " and " + query2 + " and " + query3
+          +" AND customer_code " + radioBtn + " (SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query6 + ")");
      
       } else {
-        setFinalQuery("SELECT DISTINCT customer_code from master_sales_data where " + query1 + " and " + query2 + " and " + query3);
+        setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1 + " and " + query2 + " and " + query3);
       }
     } else if (field2.length > 0) {
 
       if (field6.length > 0) {
-          setFinalQuery("SELECT DISTINCT customer_code from master_sales_data where " + query1 + " and " + query2
-          +" AND customer_code " + radioBtn + " (SELECT DISTINCT customer_code from master_sales_data where " + query6 + ")");
+          setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1 + " and " + query2
+          +" AND customer_code " + radioBtn + " (SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query6 + ")");
       
       } else {
-        setFinalQuery("SELECT DISTINCT customer_code from master_sales_data where " + query1 + " and " + query2);
+        setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1 + " and " + query2);
       }
     } else if (field1.length > 0) {
 
       if (field6.length > 0) {
-          setFinalQuery("SELECT DISTINCT customer_code from master_sales_data where " + query1
-          +" AND customer_code " + radioBtn + " (SELECT DISTINCT customer_code from master_sales_data where " + query6 + ")");
+          setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1
+          +" AND customer_code " + radioBtn + " (SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query6 + ")");
     
       } else {
-        setFinalQuery("SELECT DISTINCT customer_code from master_sales_data where " + query1);
+        setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1);
       }}
       // prettier-ignore
     },
@@ -633,20 +633,22 @@ const Homepage = () => {
                   <RecentHeader>More Recents</RecentHeader>
                   <RecentContainer>
                     {data.length > 0 &&
-                      data.map((value, i) => {
-                        return (
-                          <Queries key={i} val={i % 2 === 0 ? "#e9ecef" : ""}>
-                            {/* {value.query_name.length > 20 ? (
+                      data
+                        .sort((a, b) => b.id - a.id)
+                        .map((value, i) => {
+                          return (
+                            <Queries key={i} val={i % 2 === 0 ? "#e9ecef" : ""}>
+                              {/* {value.query_name.length > 20 ? (
                           <QName>{value.query_name}</QName>
                         ) : (
                           <QName>{value.query_name}</QName>
                         )} */}
-                            <QName>{value.query_name}</QName>
-                            <QID> {value.id}</QID>
-                            <QStatus>{value.status}</QStatus>
-                          </Queries>
-                        );
-                      })}
+                              <QName>{value.query_name}</QName>
+                              <QID> {value.id}</QID>
+                              <QStatus>{value.status}</QStatus>
+                            </Queries>
+                          );
+                        })}
                   </RecentContainer>
                 </Recents>
               </Left>

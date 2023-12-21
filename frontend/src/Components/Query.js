@@ -74,7 +74,7 @@ const Query = ({ fieldCheck, bgColor, position, bottom, field, operation, handle
             list.push(entry);
           }
 
-          query1 = field[0].value + " " + operation[0].symbol + " " + "["+ list + "]";
+          query1 = field[0].value + " " + operation[0].symbol + " " + "("+ list + ")";
 
         } else if (operation[0].value !== "In") {
           query1 = field[0].value + " " + operation[0].symbol + " '" + option[0].value + "'";
