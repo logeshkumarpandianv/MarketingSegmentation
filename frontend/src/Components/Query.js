@@ -57,7 +57,7 @@ const Span = styled.div`
 // prettier-ignore
 const Query = ({ fieldCheck, bgColor, position, bottom, field, operation, handleField, handleOperation, option, setOption, singleDate1, setSingleDate1, singleDate2, setSingleDate2, input1, setInput1, input2, setInput2, handleConstraints, setQuery, usedFields }) => {
   
-  const { fields, operations, options } = useContext(DataContext);
+  const { fields, fields1, operations, options } = useContext(DataContext);
 
   useEffect(() => {
     let query1 = "";
@@ -83,7 +83,11 @@ const Query = ({ fieldCheck, bgColor, position, bottom, field, operation, handle
       } else if (field[0].setting === "Input") {
 
         if (operation[0].value !== "Between") {
+          if(field[0].value === "sum(quantity)" || field[0].value === "sum(amount)" || field[0].value === "sum(total_disc_amount)" ) {
+            query1 = " group by customer_code, customer_name, customer_mobile having " + field[0].value + " " + operation[0].symbol + " '" + input1 + "'";
+          } else {
           query1 = field[0].value + " " + operation[0].symbol + " '" + input1 + "'";
+        }
         }
         else if (operation[0].value === "Between") {
           query1 = field[0].value + " > " + " '" + input1 + "' and " + field[0].value + " < " + "'" + input2 + "'";
@@ -137,9 +141,10 @@ const Query = ({ fieldCheck, bgColor, position, bottom, field, operation, handle
         <SelectField>
           <Select
             size={SIZE.compact}
-            options={fieldCheck === true ? fields : fields.filter(ad => 
-              usedFields.every(fd => fd !== ad.value))}
-            labelKey="id"
+            // options={fieldCheck === true ? fields : fields.filter(ad => 
+            //   usedFields.every(fd => fd !== ad.value))}
+            options={fieldCheck === true ? fields1 : fields}
+              labelKey="id"
             valueKey="value"
             onChange={({ value }) => handleField(value)}
             value={field}

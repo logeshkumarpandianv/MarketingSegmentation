@@ -21,9 +21,9 @@ const AuthContextProvider = (props) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    console.log(user);
-  });
+  // useEffect(() => {
+  //   console.log(user);
+  // });
 
   const fields = [
     { id: "ZoneName", value: "zone_name", type: 2, setting: "Dropdown" },
@@ -35,8 +35,15 @@ const AuthContextProvider = (props) => {
     // prettier-ignore
     { id: "CustomerMobile", value: "customer_mobile", type: 1, setting: "Input" },
     { id: "Quantity", value: "quantity", type: 3, setting: "Input" },
-    { id: "BaseValue", value: "base_value", type: 3, setting: "Input" },
-    { id: "Tax", value: "tax", type: 3, setting: "Input" },
+    // { id: "BaseValue", value: "base_value", type: 3, setting: "Input" },
+    // {
+    //   id: "sum(BaseValue)",
+    //   value: "sum(base_value)",
+    //   type: 3,
+    //   setting: "Input",
+    // },
+    // { id: "Tax", value: "tax", type: 3, setting: "Input" },
+    // { id: "sum(Tax)", value: "sum(tax)", type: 3, setting: "Input" },
     { id: "Amount", value: "amount", type: 3, setting: "Input" },
     // prettier-ignore
     // { id: "Mode of Payment", value: "ModeofPayment", type: 2, setting: "Dropdown" },
@@ -71,6 +78,17 @@ const AuthContextProvider = (props) => {
     // { id: "Shopping Pattern", value: "ShoppingPattern", type: 1, setting: "Dropdown" },
   ];
 
+  const fields1 = [
+    { id: "sum(Quantity)", value: "sum(quantity)", type: 3, setting: "Input" },
+    { id: "sum(Amount)", value: "sum(amount)", type: 3, setting: "Input" },
+    {
+      id: "sum(TotalDiscAmount)",
+      value: "sum(total_disc_amount)",
+      type: 3,
+      setting: "Input",
+    },
+  ];
+
   const operations = [
     { type: 1, id: "Equal To", value: "Equal To", symbol: "=" },
 
@@ -103,7 +121,7 @@ const AuthContextProvider = (props) => {
       });
 
       if (response.error === "no error") {
-        console.log(2111111);
+        // console.log(2111111);
         setData(response.data);
         setMsg("done");
       }
@@ -134,6 +152,7 @@ const AuthContextProvider = (props) => {
     <DataContext.Provider
       value={{
         fields,
+        fields1,
         operations,
         options,
         url,

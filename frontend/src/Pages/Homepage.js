@@ -522,7 +522,7 @@ const Homepage = () => {
 
         if (field6.length > 0 ) {
           setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1 + " and " + query2 + " and " + query3 + " and " + query4 + " and " + query5
-                        +" AND customer_code " + radioBtn + " (SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query6 + ")");
+                      + query6);
         } else {
           // prettier-ignore
           setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1 + " and " + query2 + " and " + query3 + " and " + query4 + " and " + query5);
@@ -531,7 +531,7 @@ const Homepage = () => {
 
       if (field6.length > 0) {
           setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1 + " and " + query2 + " and " + query3 + " and " + query4
-          +" AND customer_code " + radioBtn + " (SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query6 + ")");
+          + query6);
      
       } else {
         // prettier-ignore
@@ -541,7 +541,7 @@ const Homepage = () => {
 
       if (field6.length > 0) {
           setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1 + " and " + query2 + " and " + query3
-          +" AND customer_code " + radioBtn + " (SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query6 + ")");
+          + query6);
      
       } else {
         setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1 + " and " + query2 + " and " + query3);
@@ -550,7 +550,7 @@ const Homepage = () => {
 
       if (field6.length > 0) {
           setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1 + " and " + query2
-          +" AND customer_code " + radioBtn + " (SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query6 + ")");
+          + query6);
       
       } else {
         setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1 + " and " + query2);
@@ -559,7 +559,7 @@ const Homepage = () => {
 
       if (field6.length > 0) {
           setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1
-          +" AND customer_code " + radioBtn + " (SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query6 + ")");
+          + query6);
     
       } else {
         setFinalQuery("SELECT DISTINCT customer_code, customer_name, customer_mobile from master_sales_data where " + query1);
@@ -806,7 +806,7 @@ const Homepage = () => {
                         />
                       )}
 
-                    {(radio === "2" || radio === "3") && (
+                    {radio === "2" && (
                       <Query
                         bgColor={"#ffcdb2"}
                         position={"absolute"}
@@ -848,8 +848,8 @@ const Homepage = () => {
                             value={radio}
                           >
                             <Radio value="1">None</Radio>
-                            <Radio value="2">Include Range</Radio>
-                            <Radio value="3">Exclude Range</Radio>
+                            <Radio value="2">Group By</Radio>
+                            {/* <Radio value="3">Exclude Range</Radio> */}
                           </RadioGroup>
                         </SliderContainer>
                         {load ? (
