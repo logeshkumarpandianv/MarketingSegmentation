@@ -2,9 +2,9 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import Input from "../Components/Subcomponents/Input";
 import Button from "../Components/Subcomponents/Button";
 import { useEffect, useState } from "react";
+import InputText from "../Components/Subcomponents/InputText";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -138,8 +138,8 @@ const Login = () => {
       <Right>
         <RightInner>
           <Message>{message}</Message>
-          <Input label={"Username"} onChange={handleUserName} />
-          <Input
+          <InputText label={"Username"} onChange={handleUserName} />
+          <InputText
             label={"Password"}
             onChange={handlePassword}
             type={"password"}

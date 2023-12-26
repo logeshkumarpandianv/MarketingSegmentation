@@ -61,7 +61,7 @@ const Query = ({ fieldCheck, bgColor, position, bottom, field, operation, handle
 
   useEffect(() => {
     let query1 = "";
-
+    console.log(field, option)
     if ( field.length > 0 && operation.length > 0 && (option.length > 0 || singleDate1 !== null || singleDate2 !== null || input1 !== undefined || input2 !== undefined))
     {
       if (field[0].setting === "Dropdown") {

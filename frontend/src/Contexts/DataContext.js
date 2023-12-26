@@ -56,8 +56,8 @@ const AuthContextProvider = (props) => {
       setting: "Calender",
     },
     // prettier-ignore
-    { id: "SalesType", value: "sales_type", type: 1, setting: "Dropdown" },
-    { id: "City Name", value: "City_name", type: 2, setting: "Dropdown" },
+    // { id: "SalesType", value: "sales_type", type: 1, setting: "Dropdown" },
+    { id: "City Name", value: "city_name", type: 2, setting: "Dropdown" },
     // prettier-ignore
 
     // { id: "CustomerBAPinCode", value: "CustomerBAPinCode", type: 3, setting: "Input" },
@@ -65,13 +65,13 @@ const AuthContextProvider = (props) => {
     { id: "ProductName", value: "product_name", type: 2, setting: "Dropdown" },
     // prettier-ignore
     { id: "CustomerCode", value: "customer_code", type: 2, setting: "Dropdown" },
-    { id: "Category", value: "category_code", type: 2, setting: "Input" },
+    { id: "Category", value: "category_code", type: 2, setting: "Dropdown" },
     // { id: "Color", value: "Color", type: 2, setting: "Dropdown" },
     // { id: "Size", value: "Size", type: 2, setting: "Dropdown" },
     // prettier-ignore
     { id: "TotalDiscAmount", value: "total_disc_amount", type: 3, setting: "Input" },
-    { id: "Rate", value: "rate", type: 3, setting: "Input" },
-    { id: "Header ID", value: "ws_bill_no", type: 1, setting: "Input" },
+    // { id: "Rate", value: "rate", type: 3, setting: "Input" },
+    // { id: "Header ID", value: "ws_bill_no", type: 1, setting: "Input" },
     // prettier-ignore
     // { id: "Repeat Customer", value: "RepeatCustomer", type: 1, setting: "Dropdown" },
     // prettier-ignore

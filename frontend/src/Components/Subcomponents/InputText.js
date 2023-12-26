@@ -53,7 +53,7 @@ const Span = styled.span`
   letter-spacing: var(--ls);
 `;
 
-const Input = ({ type, onChange, onClick, name, label, index, value }) => {
+const InputText = ({ type, onChange, onClick, name, label, index, value }) => {
   return (
     <InputBox
       initial={{ opacity: 0 }}
@@ -62,10 +62,7 @@ const Input = ({ type, onChange, onClick, name, label, index, value }) => {
     >
       <InputContainer
         defaultValue={value}
-        type="number"
-        min="0"
-        step="1"
-        pattern="[0-9]{10}"
+        type={type}
         label={label}
         name={name}
         required="required"
@@ -77,4 +74,4 @@ const Input = ({ type, onChange, onClick, name, label, index, value }) => {
   );
 };
 
-export default Input;
+export default InputText;
