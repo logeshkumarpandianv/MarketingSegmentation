@@ -61,7 +61,7 @@ const Query = ({ fieldCheck, bgColor, position, bottom, field, operation, handle
 
   useEffect(() => {
     let query1 = "";
-    console.log(field, option)
+
     if ( field.length > 0 && operation.length > 0 && (option.length > 0 || singleDate1 !== null || singleDate2 !== null || input1 !== undefined || input2 !== undefined))
     {
       if (field[0].setting === "Dropdown") {
@@ -224,6 +224,7 @@ const Query = ({ fieldCheck, bgColor, position, bottom, field, operation, handle
           {operation.length > 0 && operation[0].value !== "In" && field.length > 0 && field[0].setting === "Input" && (
               <>
                 <Input
+                  type="number"
                   size={SIZE.compact}
                   value={input1}
                   onChange={(event) => setInput1(event.currentTarget.value)}
@@ -234,6 +235,7 @@ const Query = ({ fieldCheck, bgColor, position, bottom, field, operation, handle
                   <>
                     <Span> to </Span>
                     <Input
+                      type="number"
                       size={SIZE.compact}
                       value={input2}
                       onChange={(event) => setInput2(event.currentTarget.value)}

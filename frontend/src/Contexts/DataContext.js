@@ -48,7 +48,7 @@ const AuthContextProvider = (props) => {
     // prettier-ignore
     // { id: "Mode of Payment", value: "ModeofPayment", type: 2, setting: "Dropdown" },
     // prettier-ignore
-    { id: "Customer Type", value: "new_customer_type", type: 1, setting: "Dropdown" },
+    // { id: "Customer Type", value: "new_customer_type", type: 1, setting: "Dropdown" },
     {
       id: "CustomerCreatedOn",
       value: "customer_created_on",
@@ -64,7 +64,7 @@ const AuthContextProvider = (props) => {
     // prettier-ignore
     { id: "ProductName", value: "product_name", type: 2, setting: "Dropdown" },
     // prettier-ignore
-    { id: "CustomerCode", value: "customer_code", type: 2, setting: "Dropdown" },
+    // { id: "CustomerCode", value: "customer_code", type: 2, setting: "Dropdown" },
     { id: "Category", value: "category_code", type: 2, setting: "Dropdown" },
     // { id: "Color", value: "Color", type: 2, setting: "Dropdown" },
     // { id: "Size", value: "Size", type: 2, setting: "Dropdown" },
